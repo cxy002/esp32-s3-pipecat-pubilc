@@ -9,15 +9,21 @@ if(NOT IDF_TARGET STREQUAL linux)
   add_compile_definitions(WIFI_PASSWORD="$ENV{WIFI_PASSWORD}")
 endif()
 
-if(NOT DEFINED ENV{PIPECAT_SMALLWEBRTC_URL})
-  message(FATAL_ERROR "Env variable PIPECAT_SMALLWEBRTC_URL must be set")
-endif()
-
 if(DEFINED ENV{LOG_DATACHANNEL_MESSAGES})
   add_compile_definitions(LOG_DATACHANNEL_MESSAGES="1")
 endif()
 
-add_compile_definitions(PIPECAT_SMALLWEBRTC_URL="$ENV{PIPECAT_SMALLWEBRTC_URL}")
+if(DEFINED ENV{DEEPMEM_WS_HOST})
+  add_compile_definitions(DEEPMEM_WS_HOST="$ENV{DEEPMEM_WS_HOST}")
+endif()
+
+if(DEFINED ENV{DEEPMEM_WS_PORT})
+  add_compile_definitions(DEEPMEM_WS_PORT=$ENV{DEEPMEM_WS_PORT})
+endif()
+
+if(DEFINED ENV{DEEPMEM_WS_PATH})
+  add_compile_definitions(DEEPMEM_WS_PATH="$ENV{DEEPMEM_WS_PATH}")
+endif()
 
 set(COMPONENTS src)
 set(EXTRA_COMPONENT_DIRS "src" "components/srtp" "components/peer" "components/esp-libopus")

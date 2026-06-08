@@ -2,7 +2,6 @@
 
 #include <esp_event.h>
 #include <esp_log.h>
-#include <peer.h>
 
 #ifndef LINUX_BUILD
 #include "nvs_flash.h"
@@ -18,27 +17,19 @@ extern "C" void app_main(void) {
 
   ESP_ERROR_CHECK(esp_event_loop_create_default());
   pipecat_init_screen();
-  peer_init();
-  pipecat_init_audio_capture();
-  pipecat_init_audio_decoder();
-  pipecat_init_wifi();
-  pipecat_init_webrtc();
+  pipecat_init_cellular();
 
-  pipecat_screen_system_log("Pipecat ESP32 client initialized\n");
+  pipecat_screen_system_log("4G init\n");
 
   while (1) {
-    pipecat_webrtc_loop();
     vTaskDelay(pdMS_TO_TICKS(TICK_INTERVAL));
   }
 }
 #else
 int main(void) {
   ESP_ERROR_CHECK(esp_event_loop_create_default());
-  peer_init();
-  pipecat_webrtc();
 
   while (1) {
-    pipecat_webrtc_loop();
     vTaskDelay(pdMS_TO_TICKS(TICK_INTERVAL));
   }
 }
