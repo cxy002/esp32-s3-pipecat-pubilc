@@ -2,3 +2,7 @@ build
 sdkconfig
 sdkconfig.old
 managed_components
+esp32-s3-box-3/data/ava_speech/hf_mirror/dataset.zip
+esp32-s3-box-3/data/ava_speech/work/
+__pycache__/
+*.pyc

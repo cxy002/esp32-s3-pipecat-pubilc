@@ -15,7 +15,7 @@
 static i2s_chan_handle_t s_tx_handle = nullptr;
 static i2s_chan_handle_t s_rx_handle = nullptr;
 
-static int write_speaker(const int16_t *data, int samples) {
+int pipecat_audio_write_speaker(const int16_t *data, int samples) {
   if (!s_tx_handle) {
     return 0;
   }
@@ -82,7 +82,7 @@ static void play_beep() {
                                    9000.0f * envelope);
   }
 
-  write_speaker(tone.data(), tone.size());
+  pipecat_audio_write_speaker(tone.data(), tone.size());
 }
 
 static void audio_self_test_task(void *pv) {
@@ -203,5 +203,7 @@ void pipecat_init_hardware_audio() {
   ESP_ERROR_CHECK(i2s_channel_enable(s_rx_handle));
 
   ESP_LOGI(LOG_TAG, "I2S audio initialized");
+#if ENABLE_AUDIO_SELF_TEST
   xTaskCreate(audio_self_test_task, "audio_self_test", 4096, nullptr, 4, nullptr);
+#endif
 }

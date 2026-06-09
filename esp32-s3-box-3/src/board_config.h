@@ -24,3 +24,21 @@
 #define ML307_TX_PIN GPIO_NUM_12
 #define ML307_RX_PIN GPIO_NUM_11
 #define ML307_DTR_PIN GPIO_NUM_NC
+
+#define SDCARD_CLK_PIN GPIO_NUM_13
+#define SDCARD_CMD_PIN GPIO_NUM_14
+#define SDCARD_D0_PIN GPIO_NUM_8
+#define SDCARD_D1_PIN GPIO_NUM_9
+#define SDCARD_D2_PIN GPIO_NUM_10
+#define SDCARD_D3_PIN GPIO_NUM_17
+#define SDCARD_MOUNT_POINT "/sdcard"
+#define ENABLE_SDCARD_TEST 1
+#define ENABLE_AUDIO_STORAGE_TEST 1
+#define ENABLE_AUDIO_SELF_TEST 0
+#define ENABLE_SONG_PLAYER_TEST 1
+#define SONG_DEFAULT_PATH SDCARD_MOUNT_POINT "/music/SONG0001.WAV"
+
+// Test firmware mode: PC sends 16 kHz / 20 ms / int16 PCM frames over UART0,
+// ESP32 returns VAD decisions. Disable this to run the normal 4G app.
+#define ENABLE_VAD_SERIAL_TEST 0
+#define VAD_SERIAL_BAUD_RATE 921600
